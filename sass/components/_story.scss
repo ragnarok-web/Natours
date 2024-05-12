@@ -1,0 +1,62 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  &_shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+
+    shape-outside: circle(
+      50% at 50% 50%
+    ); // to shape the text appear like its wrapping around a circle even tho we don't have the shape as a circle, and the shape has to have width and height
+    // 50% is for the raduis (50 % of height and width value) , and the other two for the center in x and y
+    clip-path: circle(
+      50% at 50% 50%
+    ); // to actually make the img (shape) as a circle
+    transform: translateX(-3rem) skewX(12deg); // don't use margin
+    position: relative;
+  }
+
+  &_img {
+    height: 100%; // because width is biiger so we need to set the height to fir
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &_text {
+    transform: skewX(12deg);
+  }
+
+  &_caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden; // to remove the shaking (glitch) in the text
+  }
+
+  &:hover &_caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &_img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%);
+  }
+}
